@@ -11,10 +11,4 @@ module.exports = function(app) {
 		res.sendFile(path.join(__dirname, "../public/home.html"));
 
 	});
-
-
-	// fallback use route for homepage
-	//app.use(function(req, res) {
-	//	res.sendFile(path.join(__dirname, "../public/home.html"));
-	//});
 };
