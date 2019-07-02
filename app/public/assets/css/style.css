@@ -1,0 +1,19 @@
+.chosen-select {
+    color: pink ;
+}
+.topText {
+    color: purple;
+    background-color: brown;
+}
+
+
+#buddyModal {
+    position: relative;
+    flex: initial;
+    width: fit-content;
+}
+
+#mySubmit {
+    color: goldenrod;
+    background-color: aqua;
+}

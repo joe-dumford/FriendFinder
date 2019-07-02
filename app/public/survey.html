@@ -6,26 +6,25 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <!--New JQuery-->
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
-        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
-    <!--BS JS-->
-    <script rel="text/javascript" src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  
     <!--BootStrap-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <!--Custom SCSS-->
+    <link rel="stylesheet" type="text/scss" href="./assets/css/style.css">
 
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
 
 <body>
 
     <div class="container">
+        <div class="topText">
         <h2>Survey Questions</h2>
         <hr>
         <h3>
             <strong>About You</strong>
         </h3>
         <h4>Name (Required)</h4>
+    </div>
         <div>
             <input type="text" id="name" class="form-control" required>
             </input>
@@ -40,7 +39,7 @@
         <h3>
             <strong>Question 1</strong>
         </h3>
-        <h4>You are a loner and that's why you have no friends</h4>
+        <h4>You believe a person is responsible for their own happiness</h4>
         <select class="chosen-select" id="q1">
             <option></option>
             <option value="1"> 1 (Strongly Disagree)</option>
@@ -100,7 +99,7 @@
         <h3>
             <strong>Question 6</strong>
         </h3>
-        <h4>You are a Netflix over Night Club kind of person</h4>
+        <h4>You would rather Netflix over going to a Night Club or Bar</h4>
         <select class="chosen-select" id="q6">
             <option></option>
             <option value="1"> 1 (Strongly Disagree)</option>
@@ -125,7 +124,7 @@
         <h3>
             <strong>Question 8</strong>
         </h3>
-        <h4>You would pick music over sports</h4>
+        <h4>You would pick a concert over a sports event</h4>
         <select class="chosen-select" id="q8">
             <option></option>
             <option value="1"> 1 (Strongly Disagree)</option>
@@ -138,7 +137,7 @@
         <h3>
             <strong>Question 9</strong>
         </h3>
-        <h4>You would rather read a book than  watch TV</h4>
+        <h4>You would rather read a book than watch TV</h4>
         <select class="chosen-select" id="q9">
             <option></option>
             <option value="1"> 1 (Strongly Disagree)</option>
@@ -159,10 +158,9 @@
             <option value="4"> 4 </option>
             <option value="5"> 5 (Strongly Agree) </option>
         </select>
-        <br>
-        <button type="button" id="submit" data-toggle="modal" 
-        onclick="showModal('data')"
-        data-target="#friendModal" data-match="">Submit</button>
+
+        <button type="button" id="mySubmit" data-toggle="modal" onclick="showModal('data')" data-target="#friendModal"
+            data-match="">Submit</button>
     </div>
 
     <!-- The Modal -->
@@ -172,7 +170,7 @@
                 <div class="modal-header">
                     <h4 class="modal-title">Suggested Friend</h4>
                 </div>
-                <div class="modal-body">
+                <div class="modal-body" id="buddyModal">
                     <p>Photo</p>
                     <img src="" />
                 </div>
@@ -182,40 +180,48 @@
             </div>
         </div>
     </div>
-</div>
+    </div>
 
-<script type="text/javascript">
-    function showModal() {
 
-        //User Data Object
-        var userData = {
-            name: $("#name").val(),
-            photo: $("#photo").val(),
-            scores: [
-                $("#q1").val(),
-                $("#q2").val(),
-                $("#q3").val(),
-                $("#q4").val(),
-                $("#q5").val(),
-                $("#q6").val(),
-                $("#q7").val(),
-                $("#q8").val(),
-                $("#q9").val(),
-                $("#q10").val()
-            ]
-        };
-        
-        $.post("/api/friends", userData, function (data) {
-            $("#name").text(data.name);
-            $("#photo").attr("src", data.photo);
-            $("#friendModal").modal("show").data(userData);
-        }).then((res)=>{
-            $("#friendModal img").attr('src', res.photo);
-            
-        })
-    }
+     <!--New JQuery-->
+     <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+     integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    
+ <!--BS JS-->
+ <script rel="text/javascript" src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
-</script>
+
+    <script type="text/javascript">
+        function showModal() {
+
+            //User Data Object
+            var userData = {
+                name: $("#name").val(),
+                photo: $("#photo").val(),
+                scores: [
+                    $("#q1").val(),
+                    $("#q2").val(),
+                    $("#q3").val(),
+                    $("#q4").val(),
+                    $("#q5").val(),
+                    $("#q6").val(),
+                    $("#q7").val(),
+                    $("#q8").val(),
+                    $("#q9").val(),
+                    $("#q10").val()
+                ]
+            };
+
+            $.post("/api/friends", userData, function (data) {
+                $("#name").text(data.name);
+                $("#photo").attr("src", data.photo);
+                $("#friendModal").modal("show").data(userData);
+            }).then((res) => {
+                $("#friendModal img").attr('src', res.photo);
+
+            })
+        }
+    </script>
 
 </body>
 
